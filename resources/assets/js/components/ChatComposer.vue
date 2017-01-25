@@ -15,7 +15,11 @@ export default {
 	},
 	methods: {
 		sendMessage(){
-			console.log(this.messageText);
+			this.$emit('messagesend', {
+				message: this.messageText,
+				user : 'New Author'
+			});
+			this.messageText = '';
 		}
 	}
 }
