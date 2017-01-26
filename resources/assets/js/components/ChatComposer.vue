@@ -1,28 +1,30 @@
 <template>
-    <div class="chat-composer">
-    <input type="text" placeholder="Escreva sua mensagem..." v-model="messageText" @keydown.enter="sendMessage">
-        <button class="btn btn-primary" @click="sendMessage">Send</button>
-    </div>
+	<div class="chat-composer">
+		<input type="text" name="message" style="border-radius: 0px" id="inputMessage" class="form-control chat-composer" placeholder="Start typing your message..." v-model="messageText" @keydown.enter="sendMessage">
+		<button class="btn btn-primary" style="border-radius: 0px" @click="sendMessage">Send</button>
+	</div>
 </template>
 
 <script>
 
-export default {
-	data(){
-		return {
-			messageText : ''
-		}
-	},
-	methods: {
-		sendMessage(){
-			this.$emit('messagesend', {
-				message: this.messageText,
-				user : 'New Author'
-			});
-			this.messageText = '';
+	export default {
+		data(){
+			return {
+				messageText : ''
+			}
+		},
+		methods: {
+			sendMessage(){
+				this.$emit('messagesent', {
+					message: this.messageText,
+					user : {
+						name: $('.navbar-right .dropdown-toggle').text()
+					}
+				});
+				this.messageText = '';
+			}
 		}
 	}
-}
 
 </script>
 
@@ -34,8 +36,8 @@ export default {
 	.chat-composer input{
 		flex: 1 auto;
 	}
-	.chat-composer button{
-		border-radius: 0;
+	.whitout-border-radius button{
+		border-radius: 0!important;
 	}
 
 </style>
