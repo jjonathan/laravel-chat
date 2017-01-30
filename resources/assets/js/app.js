@@ -19,5 +19,12 @@ const app = new Vue({
 		axios.get('/messages').then(response => {
 			this.messages = response.data;
 		});
+		Echo.join('chatroom')
+			.here()
+			.joining()
+			.leaving()
+			.listen('MessagePosted', (e) => {
+				console.log(e);
+			});
 	}
 });
