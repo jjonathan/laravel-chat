@@ -11483,7 +11483,7 @@ var app = new Vue({
 		axios.get('/messages').then(function (response) {
 			_this.messages = response.data;
 		});
-		Echo.join('chatroom').here().joining().leaving().listen('MessagePosted', function (e) {
+		Echo.private('chatroom').listen('MessagePosted', function (e) {
 			console.log(e);
 		});
 	}

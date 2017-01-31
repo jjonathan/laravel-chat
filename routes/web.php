@@ -22,9 +22,10 @@ Route::group(['middleware' => 'auth'], function(){
 			'message' => request()->get('message')
 		]);
 
-		//Annouces that a new message has been posted
-		event(new MessagePosted($message, $user));
+    // Announce that a new message has been posted
+    broadcast(new MessagePosted($message, $user))->toOthers();
 
 		return ['status' => 'OK'];
 	});
 });
+
